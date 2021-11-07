@@ -1,0 +1,108 @@
+//implementation of fcfs 
+#include<iostream>
+using namespace std;
+int shorting(int n,int a[],char p[],int b[],int c[],int w[],int t[]){
+	for(int i=0; i<=n-1; i++)
+	{
+		for(int j=0; j<n-i-1; j++){
+			if((a[j]>a[j+1])||(a[j]==a[j+1]))
+			{	
+			
+			if(a[j]>a[j+1])
+			{
+				//then swap
+				int swap;
+				swap=a[j];
+				a[j]=a[j+1];
+				a[j+1]=swap;
+				
+
+			//	swap(a[j],a[j+1]);
+				int pr;
+				pr=p[j];
+				p[j]=p[j+1];
+				p[j+1]=pr;
+				
+				int br;
+				br=b[j];
+				b[j]=b[j+1];
+				b[j+1]=br;
+			}
+			else
+			{
+				if(p[j]>p[j+1]) 
+				{
+				//then swap
+				int swap;
+				swap=a[j];
+				a[j]=a[j+1];
+				a[j+1]=swap;
+				
+				int pr;
+				pr=p[j];
+				p[j]=p[j+1];
+				p[j+1]=pr;
+				
+				int br;
+				br=b[j];
+				b[j]=b[j+1];
+				b[j+1]=br;
+		    	}
+			}
+		}
+				//cout<<"Arrival time of the process   "<<p[i]<<"  "<<a[i]<<"  burst time "<<b[i]<<endl;
+	}
+}
+c[0]=a[0]+b[0];
+for(int i=1; i<n;i++)
+{
+	c[i]=c[i-1]+b[i];
+}
+for(int i=0;i<n;i++)
+{
+	t[i]=c[i]-a[i];
+}
+   		w[0] = 0;
+
+    // calculating waiting time
+    for (int i = 1; i < n ; i++)
+    {
+        w[i] =  t[i] - b[i];
+    }
+  for(int i=0;i<n;i++)
+  {
+   	cout<<"Arrival time of the process   "<<p[i]<<"  "<<a[i]<<"  burst time "<<b[i]<<" completion time "<<c[i]<<"  turnaround time "<<t[i]<<"  waiting "<<w[i]<<endl;
+
+  }
+ 
+}
+int main(){
+	int n;
+	cout<<"Enter the number of processses wanted to be entered :-  "<<"\t";
+	cin>>n;
+	int a[n],b[n],w[n],c[n],t[n];
+	char p[n];
+	//take input name of process id
+	cout<<"Enter the process id's:-   "<<endl;
+	for(int i=0;i<n;i++){
+		cin>>p[i];
+	}
+	//take the input arrival time
+	cout<<"Start entering the arrival time :-  "<<endl;;
+	for(int i=0;i<n; i++)
+	{
+		cout<<"The arrival time of the process  "<<p[i]<<"\t";
+		cin>>a[i];
+	}
+		//output the arrival time
+	cout<<"Print the arrival time "<<endl;
+cout<<"Enter the burst time of the processes :- ";
+   for(int i=0;i<n;i++){
+   	cout<<"process  "<<p[i]<<"   "<<"\t";
+   	cin>>b[i];
+   }
+   //enter the waiting time of the processses:-
+   cout<<"Enter the waiting time of the processes:-   "<<endl;
+
+	shorting(n,a,p,b,c,w,t);
+}
